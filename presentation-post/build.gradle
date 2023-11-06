@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.huylv.presentation_post'
+    compileSdk defaultCompileSdkVersion
+
+    defaultConfig {
+        minSdk defaultMinSdkVersion
+        targetSdk defaultTargetSdkVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility javaCompileVersion
+        targetCompatibility javaCompileVersion
+    }
+    kotlinOptions {
+        jvmTarget = javaTarget
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion versions.compose
+    }
+}
+
+dependencies {
+    implementation(project(path: ":domain"))
+    implementation(project(path: ":presentation-common"))
+    implementation coroutines.coroutinesAndroid
+    implementation androidx.composeUi
+    implementation androidx.composeMaterial
+    implementation androidx.viewModelKtx
+    implementation androidx.viewModelCompose
+    implementation androidx.lifecycleRuntimeKtx
+    implementation androidx.navigationCompose
+    implementation androidx.lifecycleRuntimeCompose
+    implementation androidx.composePreview
+    debugImplementation androidx.debugComposePreview
+    implementation androidx.googleFont
+    implementation di.hiltAndroid
+    kapt di.hiltCompiler
+    testImplementation test.junit
+    testImplementation test.coroutines
+    testImplementation test.mockito
+}
